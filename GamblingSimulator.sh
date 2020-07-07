@@ -49,7 +49,7 @@ else
 	netResult=$((netResult* -1 ));
 	echo "Direct Loss = $DirectResult"
 fi
-© 2020 GitHu 
+
 
 
 
