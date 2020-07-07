@@ -1,12 +1,10 @@
-#!/bin/bash -x
+#!/bin/bash-x
 
 echo "Welcome To Gambling Simulator"
 BET_LOSE=0;
 BET_WIN=1;
-DailyAmount=200;
-BetAmount=1;
 
-function BetResult()
+function betResult()
 {
 	case $1 in
 		$BET_WIN)
@@ -19,13 +17,39 @@ function BetResult()
 			echo"SOME ERROR"
 		;;
 	esac
-	echo $DailyAmount
+	echo $dailyAmount
 }
-while ((DailyAmount<=200 && DailyAmount>=50 ))
+amountWon=0;
+amountLost=0;
+netResult=0;
+for ((dayCount=1; dayCount<=20; dayCount++ ))
 do
-	betChance=$((RANDOM%2));
-	DailyAmount=$(betResult $betChance);
-done 
+	dailyAmount=100;
+	betAmount=1;
+
+	while ((dailyAmount<=150 && dailyAmount>=50 ))
+	do
+		betChance=$((RANDOM%2));
+		dailyAmount=$(betResult $betChance);
+	done
+	if((dailyAmount<100))
+	then
+		amountLost=$((amountLost+50));
+	else
+		amountWon=$((amountWon+50));
+	fi
+done
+echo "Amount Won = $amountWon"
+echo "Amount Lost = $amountLost"
+netResult=$((amountWon-amountLost));
+if ((netResult>=0))
+then
+	echo "Direct Winnings = $DirectResult"
+else
+	netResult=$((netResult* -1 ));
+	echo "Direct Loss = $DirectResult"
+fi
+© 2020 GitHu 
 
 
 
